@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CarController2;
+use App\Http\Controllers\NewsController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -218,17 +222,29 @@ Route::get('/', function () {
 // Route::get('test1', [ExampleController::class, 'test1']);
 //================================================
 
-Route::get('addCar', function () {
-    return view ('addCar');
-});
+// Route::get('addCar', function () {
+//     return view ('addCar');
+// });
 
-Route::post('carAdded', function () {
-    return 'Car Added Successfully (^_^) '. '<br>Car title is : ' .
-    '<br>Car price is : '.'<br> Car Description : ' ;
-})->name('carAdded');
+// Route::post('carAdded', function () {
+//     return 'Car Added Successfully (^_^) ';
+// })->name('carAdded');
 
-Route::get('testCar',[CarController::class,'testCar']);
+// Route::get('testCar',[CarController1::class,'testCar']);
 
+//=============================
+// web.php:=>
 
+// Route::get('login',[ExampleController::class,'login]);
+// Route::post('recieve',[ExampleController::class,'recieved])->name('recieve');
+// ------------------------------------------------------
 
+Route::get('carShow', [CarController2::class, 'create']);
+
+ Route::post('Cars',[CarController2::class, 'store'])->name('Cars');
+//===============================================
+
+Route::get('addNews', [NewsController::class, 'create']);
+
+Route::post('News', [NewsController::class, 'store'])->name('News');
 
