@@ -239,11 +239,20 @@ Route::get('/', function () {
 // Route::post('recieve',[ExampleController::class,'recieved])->name('recieve');
 // ------------------------------------------------------
 
-Route::get('carShow', [CarController2::class, 'create']);
-
- Route::post('Cars',[CarController2::class, 'store'])->name('Cars');
+// Route::get('carShow', [CarController2::class, 'create']);
+//  Route::post('Cars',[CarController2::class, 'store'])->name('Cars');
 //===============================================
 
 Route::get('addNews', [NewsController::class, 'create']);
 Route::post('News', [NewsController::class, 'store'])->name('News');
+Route::get('newsList', [NewsController::class, 'index']);
+Route::get('editPost/{id}', [NewsController::class, 'edit']);
+Route::put('updatePost/{id}', [NewsController::class, 'update'])->name('updatePost');
+
+//----------------------------------------------------
+Route::get('carShow', [CarController2::class, 'create']);
+Route::post('Cars', [CarController2::class, 'store'])->name('Cars');
+Route::get('cars', [CarController2::class, 'index']);
+Route::get('editCar/{id}', [CarController2::class, 'edit']);
+Route::put('updateCar/{id}', [CarController2::class, 'update'])->name('updateCar');
 
