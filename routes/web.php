@@ -245,6 +245,5 @@ Route::get('carShow', [CarController2::class, 'create']);
 //===============================================
 
 Route::get('addNews', [NewsController::class, 'create']);
-
 Route::post('News', [NewsController::class, 'store'])->name('News');
 
