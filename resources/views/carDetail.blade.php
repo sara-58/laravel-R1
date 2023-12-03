@@ -10,6 +10,8 @@
 <body>
     Car Title : {{ $car->carTitle}}
     <br>
+    Car Price : {{ $car->carPrice}}
+    <br>
     Car Description : {{ $car->description}}
     <br>
     Car Published : {{ $car->published}}

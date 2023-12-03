@@ -13,8 +13,8 @@
 <body>
 
     <div class="container">
-        <h2>News</h2>
-        <p>The posts list table rows:</p>
+        <h2>Trashed News</h2>
+        <p>The trashed posts list table rows:</p>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -22,8 +22,7 @@
                     <th>Content</th>
                     <th>Published</th>
                     <th>Author</th>
-                    <th>Edit</th>
-                    <th>Details</th>
+                    <th>Restore</th>
                     <th>Delete</th>
                 </tr>
             </thead>
@@ -34,9 +33,8 @@
                     <td>{{$post->content}}</td>
                     <td>{{$post->published ? 'Yes✅': 'No❌'}}</td>
                     <td>{{$post->author}}</td>
-                    <td><a href="editPost/{{$post->id}}">Edit</a></td>
-                    <td><a href="postDetail/{{$post->id}}">Show</a></td>
-                    <td><a href="deletePost/{{$post->id}}">Delete</a></td>
+                    <td><a href="restorePost/{{$post->id}}">Restore</a></td>
+                    <td><a href="forceDeletePost/{{$post->id}}">Delete</a></td>
                 </tr>
                 @endforeach
             </tbody>

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use Illuminate\Support\Facades\Redirect;
 
 class CarController2 extends Controller
 {
 
     private $columns = [
         'carTitle',
+        'carPrice',
         'description',
         'published'
     ];
@@ -34,12 +37,28 @@ class CarController2 extends Controller
      */
     public function store(Request $request)
     {
-        $cars= new Car;
-        $cars->carTitle = $request->carTitle;
-        $cars->description = $request->description;
-        $cars->published = true;
-        $cars->save();
-        return"Car title is : ". $request->carTitle . "<br> Car description is : " . $request->description . "<br> Car published is : " . $request->published;
+        // $cars= new Car;
+        // $cars->carTitle = $request->carTitle;
+        // $cars->carPrice = $request->carPrice;
+        // $cars->description = $request->description;
+        // if (isset($request->published)) {
+        //     $cars->published = true;
+        // } else {
+        //     $cars->published = false;
+        // }
+        // $cars->save();
+        // return"Car title is : ". $request->carTitle ."<br> Car Price is : ". $request->carPrice . "<br> Car description is : " . $request->description . "<br> Car published is : " . $request->published;
+            $data = $request->only($this->columns);
+            $data['published']= isset($data['published'])? true : false;
+
+            $request->validate([
+                'carTitle'=>'required|string|max:50',
+                'carPrice'=>'required|integer',
+                'description'=>'required|string|max:100',
+            ]);
+
+            Car::create($data);
+            return 'done';
     }
 
     /**
@@ -75,10 +94,25 @@ class CarController2 extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id):RedirectResponse
     {
         Car::where('id', $id)->delete();
-        return 'Car Deleted';
+        return redirect('cars');
+    }
+
+    public function trashed(){
+        $cars = Car::onlyTrashed()->get();
+        return view('trashed',compact('cars'));
+    }
+    public function restore(string $id):RedirectResponse
+    {
+        Car::where('id',$id)->restore();
+        return redirect('cars');
+    }
+    public function forceDelete(string $id): RedirectResponse
+    {
+        Car::where('id', $id)->forceDelete();
+        return redirect('trashed');
     }
 }
 

@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
             $table->string('carTitle',100);
+            $table->text('carPrice');
             $table->text('description');
             $table->boolean('published');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

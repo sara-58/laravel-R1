@@ -19,6 +19,7 @@
             <thead>
                 <tr>
                     <th>Title</th>
+                    <th>Price</th>
                     <th>Content</th>
                     <th>Published</th>
                     <th>Edit</th>
@@ -31,6 +32,7 @@
                 @foreach($cars as $car)
                 <tr>
                     <td>{{$car->carTitle}}</td>
+                    <td>{{$car->carPrice}}</td>
                     <td>{{$car->description}}</td>
                     <td>{{$car->published}}</td>
                     <td><a href="editCar/{{$car->id}}">Edit</a></td>
