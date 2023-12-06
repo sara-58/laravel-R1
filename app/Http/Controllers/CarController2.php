@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use App\Traits\Common;
 use Illuminate\Support\Facades\Redirect;
 
 class CarController2 extends Controller
 {
-
+    use Common;
     private $columns = [
         'carTitle',
         'carPrice',
         'description',
+        'carImage',
         'published'
     ];
     /**
@@ -48,15 +50,27 @@ class CarController2 extends Controller
         // }
         // $cars->save();
         // return"Car title is : ". $request->carTitle ."<br> Car Price is : ". $request->carPrice . "<br> Car description is : " . $request->description . "<br> Car published is : " . $request->published;
-            $data = $request->only($this->columns);
-            $data['published']= isset($data['published'])? true : false;
+            // $data = $request->only($this->columns);
+        // $data['published'] = isset($data['published']) ? true : false;
 
-            $request->validate([
-                'carTitle'=>'required|string|max:50',
+            $messages=[
+                'carTitle.required'=>'Title is required',
+                'carPrice.required'=>'Price is required',
+                'description.required'=>'Should be text',
+                'carImage.required'=>'Image is required',
+            ];
+
+            $data=$request->validate([
+                'carTitle'=>'required|string',
                 'carPrice'=>'required|integer',
                 'description'=>'required|string|max:100',
-            ]);
+                'carImage'=>'required|mimes:png,jpg,jpeg|max:2048',
+            ], $messages );
 
+            $fileName = $this->uploadFile($request->carImage,'assets/images');
+            $data['carImage']=$fileName;
+
+            $data['published'] = isset($request['published']);
             Car::create($data);
             return 'done';
     }
@@ -85,6 +99,13 @@ class CarController2 extends Controller
     public function update(Request $request, string $id)
     {
         $data = $request->only($this->columns);
+
+        if ($request->hasFile('carImage'))
+        {          
+        $fileName = $this->uploadFile($request->carImage, 'assets/images');
+        $data['carImage'] = $fileName;
+        }
+        
         $data['published'] = isset($data['published'])? true:false;
 
         Car::where('id',$id)->update($data);

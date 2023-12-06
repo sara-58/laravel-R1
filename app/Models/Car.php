@@ -13,6 +13,7 @@ class Car extends Model
         'carTitle',
         'carPrice',
         'description',
-        'published'
+        'carImage',
+        'published',
     ];
 }

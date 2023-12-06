@@ -21,6 +21,7 @@
                     <th>Title</th>
                     <th>Price</th>
                     <th>Content</th>
+                    <th>Image</th>
                     <th>Published</th>
                     <th>Restore</th>
                     <th>Delete</th>
@@ -32,6 +33,7 @@
                     <td>{{$car->carTitle}}</td>
                     <td>{{$car->carPrice}}</td>
                     <td>{{$car->description}}</td>
+                    <td>{{$car->carImage}}</td>
                     <td>{{$car->published}}</td>
                     <td><a href="restore/{{$car->id}}">Restore</a></td>
                     <td><a href="forceDelete/{{$car->id}}">Delete</a></td>

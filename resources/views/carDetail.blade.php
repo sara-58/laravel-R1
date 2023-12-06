@@ -14,6 +14,8 @@
     <br>
     Car Description : {{ $car->description}}
     <br>
+    Car Image : {{$car->carImage}}
+    <br>
     Car Published : {{ $car->published}}
 </body>
 

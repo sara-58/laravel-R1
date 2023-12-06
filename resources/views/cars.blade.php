@@ -21,6 +21,7 @@
                     <th>Title</th>
                     <th>Price</th>
                     <th>Content</th>
+                    <th>Image</th>
                     <th>Published</th>
                     <th>Edit</th>
                     <th>Show</th>
@@ -34,6 +35,7 @@
                     <td>{{$car->carTitle}}</td>
                     <td>{{$car->carPrice}}</td>
                     <td>{{$car->description}}</td>
+                    <td>{{$car->carImage}}</td>
                     <td>{{$car->published}}</td>
                     <td><a href="editCar/{{$car->id}}">Edit</a></td>
                     <td><a href="carDetail/{{$car->id}}">Show</a></td>

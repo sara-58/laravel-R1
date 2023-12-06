@@ -256,7 +256,7 @@ Route::get('forceDeletePost/{id}', [NewsController::class, 'forceDelete'])->name
 
 //----------------------------------------------------
 Route::get('addCar', [CarController2::class, 'create']);
-Route::post('Cars', [CarController2::class, 'store'])->name('Cars');
+Route::post('Cars', [CarController2::class, 'store'])->name('storeCar');
 Route::get('cars', [CarController2::class, 'index']);
 Route::get('trashed', [CarController2::class, 'trashed']);
 Route::get('editCar/{id}', [CarController2::class, 'edit']);
@@ -265,5 +265,9 @@ Route::get('deleteCar/{id}', [CarController2::class, 'destroy'])->name('deleteCa
 Route::put('updateCar/{id}', [CarController2::class, 'update'])->name('updateCar');
 Route::get('restore/{id}', [CarController2::class, 'restore'])->name('restore');
 Route::get('forceDelete/{id}', [CarController2::class, 'forceDelete'])->name('forceDelete');
+
+//-------------------------------------------------
+Route::get('showUpload',[ExampleController::class,'showUpload']);
+Route::post('upload',[ExampleController::class, 'upload'])->name('image');
 
 
