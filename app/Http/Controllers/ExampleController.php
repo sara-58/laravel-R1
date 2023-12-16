@@ -27,4 +27,17 @@ class ExampleController extends Controller
         $h = $this->uploadFile($request->image ,'assets/images');
         return $h ;
     }
+
+    public function place()
+    {
+        return view('place');
+    }
+    public function blog1()
+    {
+        return view('blog1');
+    }
+    public function blog()
+    {
+        return view('blog');
+    }
 }

@@ -17,6 +17,8 @@
     Car Image : {{$car->carImage}}
     <br>
     Car Published : {{ $car->published}}
+    <br>
+    Car Category : {{ $car->category->categoryName}}
 </body>
 
 </html>

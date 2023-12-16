@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use App\Models\Car;
+use App\Models\Category;
 use App\Traits\Common;
 use Illuminate\Support\Facades\Redirect;
 
@@ -15,7 +16,8 @@ class CarController2 extends Controller
         'carPrice',
         'description',
         'carImage',
-        'published'
+        'published',
+        'category_id',
     ];
     /**
      * Display a listing of the resource.
@@ -31,7 +33,8 @@ class CarController2 extends Controller
      */
     public function create()
     {
-        return view("addCar");
+        $categories = Category::select('id','categoryName')->get();   
+        return view('addCar', compact('categories'));
     }
 
     /**
@@ -70,7 +73,10 @@ class CarController2 extends Controller
             $fileName = $this->uploadFile($request->carImage,'assets/images');
             $data['carImage']=$fileName;
 
+            $data['category_id'] = $request['category_id'];
+
             $data['published'] = isset($request['published']);
+
             Car::create($data);
             return 'done';
     }
@@ -89,8 +95,9 @@ class CarController2 extends Controller
      */
     public function edit(string $id)
     {
+        $categories = Category::select('id', 'categoryName')->get();
         $car =Car::findOrFail($id);
-        return view('updateCar',compact('car'));
+        return view('updateCar',compact('car'), compact('categories'));
     }
 
     /**

@@ -51,11 +51,25 @@
                     {{ $message }}
                 </div>
                 @enderror
+            </div>
+            <div class="form-group">
+                <label for="category">Category: </label>
+                <select name="category_id" id="">
+                    <option value="">Select Category</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id}}">{{$category->categoryName}}</option>
+                    @endforeach
+                </select>
+                @error('carPrice')
+                <div class="alert alert-danger">
+                    {{$message}}
                 </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" name="published"> Published</label>
-                </div>
-                <button type="submit" class="btn btn-default">Add</button>
+                @enderror
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="published"> Published</label>
+            </div>
+            <button type="submit" class="btn btn-default">Add</button>
         </form>
     </div>
 

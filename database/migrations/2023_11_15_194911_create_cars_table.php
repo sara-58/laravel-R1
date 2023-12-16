@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('carTitle',100);
             $table->text('carPrice');
+            $table->foreignId('category_id')->constrained('categories');
             $table->text('description');
             $table->string('carImage');
             $table->boolean('published');

@@ -270,4 +270,10 @@ Route::get('forceDelete/{id}', [CarController2::class, 'forceDelete'])->name('fo
 Route::get('showUpload',[ExampleController::class,'showUpload']);
 Route::post('upload',[ExampleController::class, 'upload'])->name('image');
 
+//------------------------------------
+
+Route::get('place', [ExampleController::class, 'place']);
+Route::get('blog1', [ExampleController::class, 'blog1']);
+Route::get('blog', [ExampleController::class, 'blog']);
+//===================================================
 

@@ -33,6 +33,15 @@
                 <label for="image">Image:</label>
                 <input type="file" class="form-control" id="image" name="carImage" value="{{ $car->carImage }}">
             </div>
+            <div class="form-group">
+                <label for="category">Category:</label>
+                <select name="category_id" id="category_id">
+                    <option value="{{ $car->category_id }}">{{$car->category->categoryName}}</option>
+                    @foreach($categories as $category)
+                    <option value="{{ $category->id}}">{{$category->categoryName}}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="checkbox">
                 <label><input type="checkbox" name="published" @checked($car->published)> Published</label>
             </div>
