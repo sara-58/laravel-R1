@@ -5,6 +5,9 @@ use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CarController2;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\MailController;
+use App\Mail\myTestEmail;
+use App\Mail\DemoMail;
 
 
 /*
@@ -276,4 +279,56 @@ Route::get('place', [ExampleController::class, 'place']);
 Route::get('blog1', [ExampleController::class, 'blog1']);
 Route::get('blog', [ExampleController::class, 'blog']);
 //===================================================
+
+//======================================================
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//Route::get('postEmail', [App\Http\Controllers\HomeController::class, 'postEmail'])->name('postEmail');
+
+Route::post('build', [App\Mail\myTestEmail::class, 'build'])->name('emailMe');
+
+//============================================================
+
+
+
+Route::post('send/demo',function(){
+    // $data=[
+    //     'title' => 'New Message',
+    //     'userName' => 'userName',
+    //     'userEmail'=>'userEmail',
+    //     'address'=>'address'
+    // ];
+
+    
+    Mail::to('sara@example.com')->send(new App\Mail\DemoMail);
+});
+//====================================================
+
+
+Route::get('postEmail', [App\Mail\DemoMail::class, 'postEmail'])->name('postEmail');
+
+
+Route::post('send/temp',function(){
+    $data=[
+        'title'=>'Test Title',
+        'content'=>'userName',
+        'userName'=>'lolo',
+        'userEmail' => 'lolo@gmail.com',
+        'message' => 'lolo'
+    ];
+
+Mail::to('test@laravel.com')->send(new App\Mail\TempMail($data));
+});
+
+
+
+
+
+
+
+
+
+
 

@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Vendor;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,7 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
         Car::factory(10)->create();
-        Category::factory(10)->create();
+        Category::factory(3)->create();
+        Vendor::factory(3)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
