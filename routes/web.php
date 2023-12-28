@@ -258,9 +258,9 @@ Route::get('restorePost/{id}', [NewsController::class, 'restore'])->name('restor
 Route::get('forceDeletePost/{id}', [NewsController::class, 'forceDelete'])->name('forceDeletePost');
 
 //----------------------------------------------------
-Route::get('addCar', [CarController2::class, 'create']);
+// Route::get('addCar', [CarController2::class, 'create']);
 Route::post('Cars', [CarController2::class, 'store'])->name('storeCar');
-Route::get('cars', [CarController2::class, 'index']);
+Route::get('cars', [CarController2::class, 'index'])->middleware('verified');
 Route::get('trashed', [CarController2::class, 'trashed']);
 Route::get('editCar/{id}', [CarController2::class, 'edit']);
 Route::get('carDetail/{id}', [CarController2::class, 'show'])->name('carDetail');
@@ -293,42 +293,65 @@ Route::post('build', [App\Mail\myTestEmail::class, 'build'])->name('emailMe');
 
 
 
-Route::post('send/demo',function(){
-    // $data=[
-    //     'title' => 'New Message',
-    //     'userName' => 'userName',
-    //     'userEmail'=>'userEmail',
-    //     'address'=>'address'
-    // ];
+// Route::post('send/demo',function(){
+//     // $data=[
+//     //     'title' => 'New Message',
+//     //     'userName' => 'userName',
+//     //     'userEmail'=>'userEmail',
+//     //     'address'=>'address'
+//     // ];
 
     
-    Mail::to('sara@example.com')->send(new App\Mail\DemoMail);
-});
+//     Mail::to('sara@example.com')->send(new App\Mail\DemoMail);
+// });
 //====================================================
 
 
-Route::get('postEmail', [App\Mail\DemoMail::class, 'postEmail'])->name('postEmail');
+// Route::get('postEmail', [App\Mail\DemoMail::class, 'postEmail'])->name('postEmail');
 
 
-Route::post('send/temp',function(){
-    $data=[
-        'title'=>'Test Title',
-        'content'=>'userName',
-        'userName'=>'lolo',
-        'userEmail' => 'lolo@gmail.com',
-        'message' => 'lolo'
-    ];
+// Route::post('send/temp',function(){
+//     $data=[
+//         'title'=>'Test Title',
+//         'content'=>'userName',
+//         'userName'=>'lolo',
+//         'userEmail' => 'lolo@gmail.com',
+//         'message' => 'lolo'
+//     ];
 
-Mail::to('test@laravel.com')->send(new App\Mail\TempMail($data));
-});
-
-
+// Mail::to('test@laravel.com')->send(new App\Mail\TempMail($data));
+// });
 
 
+Route::get('session',[ExampleController::class , 'mySession']);
+
+//============================================
+Route::get('myTemplate', [ExampleController::class, 'myTemplate']);
+
+// Route::get('contact', [ExampleController::class, 'contact']);
+// Route::post('receiveContact', [ExampleController::class, 'receiveContact'])->name('receiveContact');
 
 
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {         
+        Route::get('contact', [ExampleController::class, 'contact']);
+        Route::post('receiveContact', [ExampleController::class, 'receiveContact'])->name('receiveContact');
+    }
+);
 
-
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
+        Route::get('addCar', [CarController2::class, 'create']);
+    }
+);
 
 
 

@@ -13,6 +13,7 @@
 <body>
 
     <div class="container">
+
         <h2>Vertical (basic) form</h2>
         <form action="{{ route('recieve')}}" method="post">
             @csrf

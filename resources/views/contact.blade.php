@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -20,22 +20,29 @@
 
     <div class="wrapper">
         <div class="inner">
-            <form action="sendTemp" method="post">
+            <div>
+                <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+                <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+            </div>
+            <h2 class="text-center">{{ __('messages.contactForm') }}</h2>
+            <form name="contacts" id="contacts" method="post" action="{{ route('receiveContact') }}">
                 @csrf
                 <h3>Contact Us</h3>
                 <p> Welcome &#128512 , How can we help you ?</p>
                 <label class="form-group">
-                    <input type="text" class="form-control" required name="userName">
+
+                    <input type="text" class="form-control" id="name" name="userName" required>
+
                     <span>Your Name</span>
                     <span class="border"></span>
                 </label>
                 <label class="form-group">
-                    <input type="text" class="form-control" required name="userEmail">
+                    <input type="email" class="form-control" id="email" name="userEmail"  required>
                     <span for="">Your Mail</span>
                     <span class="border"></span>
                 </label>
                 <label class="form-group">
-                    <textarea name="" id="" class="form-control" required name="message"></textarea>
+                    <textarea id="" class="form-control" required name="message"></textarea>
                     <span for="">Your Message</span>
                     <span class="border"></span>
                 </label>

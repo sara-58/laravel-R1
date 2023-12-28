@@ -4,25 +4,23 @@ namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-
-use Illuminate\Support\Facades\Request;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Mail\Mailables\Address;
 
-class TempMail extends Mailable
+class ContactMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public array $data;
 
-    public $data=[];
     /**
      * Create a new message instance.
      */
-    public function __construct($data = [])
+    public function __construct(array $content)
     {
-        $this->data= $data;
+        $this->data = $content;
     }
 
     /**
@@ -31,8 +29,8 @@ class TempMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address('new@mail.com', $this->data['userName']),
-            subject: $this->data['title'],
+            from: new Address($this->data['userEmail'], $this->data['userName']),
+            subject: $this->data['message'],
         );
     }
 
@@ -42,9 +40,9 @@ class TempMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            markdown: 'emails.tempMail',
-            with:[
-                'content'=>$this->data
+            markdown: 'contactMail',
+            with: [
+                'data' => $this->data,
             ]
         );
     }

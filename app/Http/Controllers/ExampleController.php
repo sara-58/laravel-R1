@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 use App\Traits\Common;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
+
+use App\Mail\ContactMail;
+use Illuminate\Support\Facades\Mail;
 
 class ExampleController extends Controller
 {
@@ -40,4 +44,37 @@ class ExampleController extends Controller
     {
         return view('blog');
     }
+
+    public function mySession()
+    {
+        session()->put('test','First laravel session');
+
+        $data = session('test');
+
+        return view('session',compact('data'));
+    }
+
+    public function myTemplate()
+    {
+        return view('myTemplate');
+    }
+
+    public function contact()
+    {
+        return view('contact');
+    }
+
+    public function receiveContact(Request $request)
+    {
+        $content = [
+            'userName' => $request->userName,
+            'userEmail' => $request->userEmail,
+            'message' => $request->message,
+        ];
+
+        Mail::to('sara@example.com')->send(new ContactMail($content));
+
+        return "mail sent!";
+    }
+    
 }
