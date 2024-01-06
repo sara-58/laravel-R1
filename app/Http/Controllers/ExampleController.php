@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Traits\Common;
 use Illuminate\Http\Request;
+use App\Models\User;
 use PhpParser\Node\Expr\FuncCall;
 
 use App\Mail\ContactMail;
@@ -13,6 +14,10 @@ class ExampleController extends Controller
     use Common;
     public function test1(){
         return view("login");
+    }
+    public function create()
+    {
+    //
     }
     public function showUpload(){
         return view('upload');
